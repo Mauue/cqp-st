@@ -3,7 +3,7 @@ import db
 import main
 
 
-bot = CQHttp()
+bot = CQHttp(api_root='http://127.0.0.1:5699')
 s = main.SearchMachine()
 
 @bot.on_message('private')
