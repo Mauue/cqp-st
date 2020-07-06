@@ -6,6 +6,7 @@ import main
 bot = CQHttp(api_root='http://127.0.0.1:5699')
 s = main.SearchMachine()
 
+
 @bot.on_message('private')
 async def _(event: Event):
     message = str(event.message)
@@ -22,11 +23,17 @@ async def _(event: Event):
         m = s.search(tag)
         return {'reply': m}
     elif message == '#涩图':
-        url = db.get_img_url(mark=False)
+        url = main.get_random_img_in_file()
         if url is None:
             return {'reply': "没用库存了"}
-        img = MessageSegment.image(url)
+        img = MessageSegment.image('temp/'+url)
         await bot.send(event, img)
+    elif message.startswith("#下载"):
+        num = message.replace('#搜索', '', 1)
+        if not num:
+            num = 10
+        m = main.random_download(num)
+        return {'reply': '已下载{}张图片'.format('m')}
 
 
 @bot.on_message('group')

@@ -1,3 +1,5 @@
+import os
+import random
 import time
 
 import requests
@@ -12,14 +14,43 @@ proxies = {
 post_url = "https://danbooru.donmai.us/posts/{id}"
 post_search_url = "https://danbooru.donmai.us/posts?page={page}&tags={tag}"
 
+# image_path = "C:\Users\Administrator\Desktop\酷Q Pro\data\image\temp\"
+image_path = "D:\Workspace\Python\setu"
+
 
 def request_get(url):
     return requests.get(url, proxies=proxies)
 
 
-def get_img_object(url):
+def get_random_img_in_file():
+    image_list = os.listdir(image_path)
+    filename = random.choice(image_list)
+    return filename
+
+
+def download_image(url, filename):
     r = request_get(url)
-    return r.content
+    with open(os.path.join(image_path, filename), 'wb') as f:
+        f.write(r.content)
+
+
+def random_download(num=10):
+    images = db.get_img_url(mark=False, num=num)
+    for image in images:
+        download_image(image["url"], image["filename"])
+    return len(images)
+
+
+def delete_image(filename):
+    os.remove(os.path.join(image_path, filename))
+
+
+def clean_image_mark():
+    mark_list = db.get_mark_img()
+    files = os.listdir(image_path)
+    for file in files:
+        if file in mark_list:
+            delete_image(file)
 
 
 class SearchMachine:
@@ -46,7 +77,8 @@ class SearchMachine:
                         r = request_get(post_url.format(id=post_id))
                         rating = re.search('<li id="post-info-rating">Rating: (.*?)</li>', r.text).group(1)
                         url = re.search('<a download.*?href="(.*?)"', r.text).group(1)
-                        db.new_img(id=post_id, rating=rating, url=url)
+                        filename = post_id + '.' + re.search(r'\.(.*?)\?', url.split('/')[-1]).group(1)
+                        db.new_img(id=post_id, rating=rating, url=url, filename=filename)
                         time.sleep(0.2)
                 message = "获取结果共{}页".format(page_max)
         except Exception as e:
@@ -57,10 +89,6 @@ class SearchMachine:
 
 
 if __name__ == "__main__":
-    url = db.get_img_url(mark=False)
-    print(url)
-    # img = get_img_object(url)
-    # print(img)
-    # with open('a.jpg', 'wb') as f:
-    #     f.write(img)
-
+    # s = SearchMachine()
+    # print(s.search(tag))
+    print(clean_image_mark())
