@@ -35,7 +35,7 @@ def mark_image(id):
 def get_img_url(rating="Safe", num=1, mark=True):
     result = cursor.execute("SELECT id, url, filename FROM Image"
                             " WHERE rating=\"%s\" AND send=0"
-                            " ORDER BY RANDOM() LIMIT %s" % (rating, num)).fetchall()
+                            " ORDER BY RANDOM() LIMIT %s" % (rating, int(num))).fetchall()
     if result is not None:
         return [{"url": i[1], "filename": i[2]} for i in result]
     return None

@@ -29,7 +29,7 @@ async def _(event: Event):
         img = MessageSegment.image('temp/'+url)
         await bot.send(event, img)
     elif message.startswith("#下载"):
-        num = message.replace('#搜索', '', 1)
+        num = message.replace('#下载', '', 1)
         if not num:
             num = 10
         m = main.random_download(num)
