@@ -28,6 +28,11 @@ def get_random_img_in_file():
     return filename
 
 
+def get_file_count():
+    files = os.listdir(image_path)
+    return len(files)
+
+
 async def download_image(url, filename):
     r = await request_get(url)
     with open(os.path.join(image_path, filename), 'wb') as f:

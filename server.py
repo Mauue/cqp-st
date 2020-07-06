@@ -15,7 +15,8 @@ async def _(event: Event):
         return {'reply': "初始化完成"}
     elif message == '#库存':
         count = db.count_img()
-        return {'reply': "剩余:{}".format(count)}
+        file_count = main.get_file_count()
+        return {'reply': "剩余:{}/{}".format(file_count, count)}
     elif message.startswith('#搜索'):
         tag = message.replace('#搜索', '', 1)
         if not tag:
