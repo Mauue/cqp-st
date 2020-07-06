@@ -38,7 +38,15 @@ async def _(event: Event):
 
 @bot.on_message('group')
 async def _g(event: Event):
-   pass
+    message = str(event.message)
+    if message == '#涩图':
+        filename = main.get_random_img_in_file()
+        if filename is None:
+            return {'reply': "没用库存了"}
+        img = MessageSegment.image('temp/' + filename)
+        await bot.send(event, img)
+        main.delete_image(filename)
+        db.mark_image(filename.split('.')[0])
 
 
 bot.run(host='127.0.0.1', port=7890)
