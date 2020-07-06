@@ -13,18 +13,28 @@ def init():
 
 
 def new_img(id, rating, url):
-    f = cursor.execute('''SELECT ID FROM Image WHERE ID=%s''' % id).fetchone()
+    f = cursor.execute('''SELECT ID FROM Image WHERE ID=%s''' % int(id)).fetchone()
     if f is not None:
         return
     cursor.execute('''INSERT INTO Image (ID, rating, url) \
       VALUES ({}, "{}", "{}")
-    '''.format(id, rating, url))
+    '''.format(int(id), rating, url))
     conn.commit()
 
 
-def get_img(rating="Safe"):
-    c = cursor.execute("SELECT id, url FROM Image WHERE rating=\"%s\" AND send=0" % rating).fetchone()
+def get_img_url(rating="Safe", mark=True):
+    c = cursor.execute("SELECT id, url FROM Image"
+                       " WHERE rating=\"%s\" AND send=0"
+                       " ORDER BY RAND() LIMIT 1" % rating).fetchone()
     if c is not None:
-        print(c[0], c[1])
-        cursor.execute("UPDATE Image SET send=1 WHERE id=%s" % c[0])
-        conn.commit()
+        if mark:
+            cursor.execute("UPDATE Image SET send=1 WHERE id=%s" % c[0])
+            conn.commit()
+        return c[1]
+
+
+def count_img(rating="Safe"):
+    c = cursor.execute("SELECT COUNT(id) FROM Image WHERE rating=\"%s\" AND send=0" % rating).fetchone()
+    return c[0]
+
+
