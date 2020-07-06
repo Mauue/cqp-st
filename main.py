@@ -18,7 +18,7 @@ image_path = "C:/Users/Administrator/Desktop/酷Q Pro/data/image/temp/"
 # image_path = "D:/Workspace/Python/setu"
 
 
-def request_get(url):
+async def request_get(url):
     return requests.get(url, proxies=proxies)
 
 
@@ -28,8 +28,8 @@ def get_random_img_in_file():
     return filename
 
 
-def download_image(url, filename):
-    r = request_get(url)
+async def download_image(url, filename):
+    r = await request_get(url)
     with open(os.path.join(image_path, filename), 'wb') as f:
         f.write(r.content)
 
@@ -37,7 +37,7 @@ def download_image(url, filename):
 async def random_download(num=10):
     images = db.get_img_url(mark=False, num=num)
     for image in images:
-        download_image(image["url"], image["filename"])
+        await download_image(image["url"], image["filename"])
     return len(images)
 
 

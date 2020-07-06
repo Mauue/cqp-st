@@ -28,7 +28,7 @@ def new_img(id, rating, url, filename):
 
 
 def mark_image(id):
-    cursor.execute("UPDATE Image SET send=1 WHERE id=%s" % c[0])
+    cursor.execute("UPDATE Image SET send=1 WHERE id=%s" % id)
     conn.commit()
 
 
