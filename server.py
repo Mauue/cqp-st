@@ -25,7 +25,7 @@ async def _(event: Event):
         url = db.get_img_url(mark=False)
         if url is None:
             return {'reply': "没用库存了"}
-        img = MessageSegment.image(url)
+        img = 'http://i0.hdslb.com/bfs/article/f2cc4879436b03c60d29b42488ac9d701b295308.jpg'
         await bot.send(event, img)
 
 
