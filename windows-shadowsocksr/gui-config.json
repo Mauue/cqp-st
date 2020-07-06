@@ -1,0 +1,112 @@
+{
+	"configs" : [
+		{
+			"remarks" : "美",
+			"id" : "0265DF604E3D19B23318C4485F620401",
+			"server" : "us41.xyz",
+			"server_port" : 46789,
+			"server_udp_port" : 0,
+			"password" : "4253",
+			"method" : "aes-256-cfb",
+			"protocol" : "origin",
+			"protocolparam" : "",
+			"obfs" : "plain",
+			"obfsparam" : "",
+			"remarks_base64" : "576O",
+			"group" : "FreeSSR-public",
+			"enable" : true,
+			"udp_over_tcp" : false
+		},
+		{
+			"remarks" : "香港",
+			"id" : "772C6F6BD1CAD5A0ACFD16DED1E86A7C",
+			"server" : "hk41.xyz",
+			"server_port" : 46789,
+			"server_udp_port" : 0,
+			"password" : "4253",
+			"method" : "aes-256-cfb",
+			"protocol" : "origin",
+			"protocolparam" : "",
+			"obfs" : "plain",
+			"obfsparam" : "",
+			"remarks_base64" : "6aaZ5riv",
+			"group" : "FreeSSR-public",
+			"enable" : true,
+			"udp_over_tcp" : false
+		},
+		{
+			"remarks" : "日本",
+			"id" : "A20418C9AD05743F67C22A56A37DDB3A",
+			"server" : "jp41.xyz",
+			"server_port" : 46789,
+			"server_udp_port" : 0,
+			"password" : "4253",
+			"method" : "aes-256-cfb",
+			"protocol" : "origin",
+			"protocolparam" : "",
+			"obfs" : "plain",
+			"obfsparam" : "",
+			"remarks_base64" : "5pel5pys",
+			"group" : "FreeSSR-public",
+			"enable" : true,
+			"udp_over_tcp" : false
+		},
+		{
+			"remarks" : "备用",
+			"id" : "8F0D76E9DAAD34C23C9BD9B148F994BD",
+			"server" : "us42.xyz",
+			"server_port" : 46789,
+			"server_udp_port" : 0,
+			"password" : "4",
+			"method" : "aes-256-cfb",
+			"protocol" : "origin",
+			"protocolparam" : "",
+			"obfs" : "plain",
+			"obfsparam" : "",
+			"remarks_base64" : "5aSH55So",
+			"group" : "FreeSSR-public",
+			"enable" : true,
+			"udp_over_tcp" : false
+		}
+	],
+	"index" : 2,
+	"random" : true,
+	"sysProxyMode" : 2,
+	"shareOverLan" : true,
+	"localPort" : 1080,
+	"localAuthPassword" : "8YHWnu1BgMdqbrcLqjdR",
+	"dnsServer" : "",
+	"reconnectTimes" : 2,
+	"randomAlgorithm" : 3,
+	"randomInGroup" : false,
+	"TTL" : 0,
+	"connectTimeout" : 5,
+	"proxyRuleMode" : 0,
+	"proxyEnable" : false,
+	"pacDirectGoProxy" : false,
+	"proxyType" : 0,
+	"proxyHost" : "",
+	"proxyPort" : 0,
+	"proxyAuthUser" : "",
+	"proxyAuthPass" : "",
+	"proxyUserAgent" : "",
+	"authUser" : "",
+	"authPass" : "",
+	"autoBan" : false,
+	"sameHostForSameTarget" : false,
+	"keepVisitTime" : 180,
+	"isHideTips" : false,
+	"nodeFeedAutoUpdate" : false,
+	"serverSubscribes" : [
+		{
+			"URL" : "http://x.easysocks.net/get.php?type=ipv4&port=17225&pass=vpnvpn123",
+			"Group" : "EasySocks"
+		}
+	],
+	"token" : {
+
+	},
+	"portMap" : {
+
+	}
+}

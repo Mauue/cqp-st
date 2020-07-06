@@ -59,8 +59,8 @@ class SearchMachine:
 if __name__ == "__main__":
     url = db.get_img_url(mark=False)
     print(url)
-    img = get_img_object(url)
-    print(img)
-    with open('a.jpg', 'wb') as f:
-        f.write(img)
+    # img = get_img_object(url)
+    # print(img)
+    # with open('a.jpg', 'wb') as f:
+    #     f.write(img)
 
