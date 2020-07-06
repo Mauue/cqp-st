@@ -52,6 +52,5 @@ class SearchMachine:
 
 
 if __name__ == "__main__":
-    s = SearchMachine()
-    print(s.search(tag))
+    print(db.get_img_url(mark=False))
 

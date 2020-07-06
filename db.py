@@ -25,7 +25,7 @@ def new_img(id, rating, url):
 def get_img_url(rating="Safe", mark=True):
     c = cursor.execute("SELECT id, url FROM Image"
                        " WHERE rating=\"%s\" AND send=0"
-                       " ORDER BY RAND() LIMIT 1" % rating).fetchone()
+                       " ORDER BY RANDOM() LIMIT 1" % rating).fetchone()
     if c is not None:
         if mark:
             cursor.execute("UPDATE Image SET send=1 WHERE id=%s" % c[0])
