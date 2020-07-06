@@ -33,7 +33,7 @@ async def _(event: Event):
         if not num:
             num = 10
         m = main.random_download(num)
-        return {'reply': '已下载{}张图片'.format('m')}
+        return {'reply': '已下载{}张图片'.format(m)}
 
 
 @bot.on_message('group')
