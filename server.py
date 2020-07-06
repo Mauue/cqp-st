@@ -23,7 +23,10 @@ async def _(event: Event):
         return {'reply': m}
     elif message == '#涩图':
         url = db.get_img_url(mark=False)
-        return {'reply': url}
+        if url is None:
+            return {'reply': "没用库存了"}
+        img = MessageSegment.image(url)
+        await bot.send(event, img)
 
 
 @bot.on_message('group')

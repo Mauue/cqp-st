@@ -17,6 +17,11 @@ def request_get(url):
     return requests.get(url, proxies=proxies)
 
 
+def get_img_object(url):
+    r = request_get(url)
+    return r.content
+
+
 class SearchMachine:
     def __init__(self):
         self._searching = False
@@ -52,5 +57,10 @@ class SearchMachine:
 
 
 if __name__ == "__main__":
-    print(db.get_img_url(mark=False))
+    url = db.get_img_url(mark=False)
+    print(url)
+    img = get_img_object(url)
+    print(img)
+    with open('a.jpg', 'wb') as f:
+        f.write(img)
 
