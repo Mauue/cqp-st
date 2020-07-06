@@ -34,7 +34,7 @@ def download_image(url, filename):
         f.write(r.content)
 
 
-def random_download(num=10):
+async def random_download(num=10):
     images = db.get_img_url(mark=False, num=num)
     for image in images:
         download_image(image["url"], image["filename"])

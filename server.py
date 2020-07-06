@@ -32,7 +32,7 @@ async def _(event: Event):
         num = message.replace('#下载', '', 1)
         if not num:
             num = 10
-        m = main.random_download(num)
+        m = await main.random_download(num)
         return {'reply': '已下载{}张图片'.format(m)}
 
 
