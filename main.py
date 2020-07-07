@@ -14,8 +14,8 @@ proxies = {
 post_url = "https://danbooru.donmai.us/posts/{id}"
 post_search_url = "https://danbooru.donmai.us/posts?page={page}&tags=order%3Ascore+rating%3Asafe+{tag}"
 
-# image_path = "C:/Users/Administrator/Desktop/酷Q Pro/data/image/temp/"
-image_path = "D:/Workspace/Python/setu"
+image_path = "C:/Users/Administrator/Desktop/酷Q Pro/data/image/temp/"
+# image_path = "D:/Workspace/Python/setu"
 
 
 def request_get(url):
