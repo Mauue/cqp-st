@@ -9,7 +9,8 @@ def init():
            (ID INTEGER PRIMARY KEY     NOT NULL,
            rating  TEXT    NOT NULL,
            url TEXT NOT NULL,
-           send BOOLEAN DEFAULT 0)''')
+           send BOOLEAN DEFAULT 0,
+           download BOOLEAN DEFAULT 0)''')
     cursor.execute('''CREATE TABLE IF NOT EXISTS Status(
         name TEXT PRIMARY KEY NOT NULL,
         value TEXT NOT NULL
@@ -32,12 +33,26 @@ def mark_image(id):
     conn.commit()
 
 
+def download_image(id):
+    try:
+        id = int(id)
+        cursor.execute("UPDATE Image SET download=1 WHERE id=%s" % id)
+        conn.commit()
+    except ValueError:
+        pass
+
+
+def clean_download_record():
+    cursor.execute("UPDATE Image SET download=0")
+    conn.commit()
+
+
 def get_img_url(rating="Safe", num=1, mark=True):
     result = cursor.execute("SELECT id, url, filename FROM Image"
-                            " WHERE rating=\"%s\" AND send=0"
+                            " WHERE rating=\"%s\" AND send=0 AND download=0"
                             " ORDER BY RANDOM() LIMIT %s" % (rating, int(num))).fetchall()
     if result is not None:
-        return [{"url": i[1], "filename": i[2]} for i in result]
+        return [{"id":i[0], "url": i[1], "filename": i[2]} for i in result]
     return None
 
 
@@ -50,3 +65,8 @@ def count_img(rating="Safe"):
 def get_mark_img():
     c = cursor.execute("SELECT filename FROM Image WHERE send=1").fetchall()
     return [i[0] for i in c]
+
+
+def has_img(id):
+    f = cursor.execute('''SELECT ID FROM Image WHERE ID=%s''' % int(id)).fetchone()
+    return f is not None
