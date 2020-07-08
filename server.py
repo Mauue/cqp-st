@@ -48,7 +48,17 @@ async def _g(event: Event):
         if filename is None:
             return {'reply': "没有库存了"}
         img = MessageSegment.image('temp/' + filename)
-        await bot.send(event, img)
+        times = 0
+        err = ""
+        while times < 5:
+            try:
+                await bot.send(event, img)
+                break
+            except Exception as e:
+                times += 1
+                err = e
+        else:
+            return {'reply': "发生错误：" + err}
         main.delete_image(filename)
         db.mark_image(filename.split('.')[0])
 
