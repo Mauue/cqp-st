@@ -6,11 +6,16 @@ import main
 bot = CQHttp(api_root='http://127.0.0.1:5699')
 s = main.SearchMachine()
 
-command = {
-    "色图": 'image',
-    "涩图": 'image',
-    "瑟图": 'image'
-}
+
+def get_command(message):
+    command = {
+        "#色图": 'image',
+        "#涩图": 'image',
+        "#瑟图": 'image'
+    }
+    if message in command:
+        return command[message]
+    return ""
 
 
 @bot.on_message('private')
@@ -29,7 +34,7 @@ async def _(event: Event):
             return {'reply': "需要搜索tag"}
         m = s.search(tag)
         return {'reply': m}
-    elif command[message] == "image":
+    elif get_command(message) == "image":
         filename = main.get_random_img_in_file()
         if filename is None:
             return {'reply': "没有库存了"}
@@ -48,7 +53,7 @@ async def _(event: Event):
 @bot.on_message('group')
 async def _g(event: Event):
     message = str(event.message)
-    if command[message] == "image":
+    if get_command(message) == "image":
         filename = main.get_random_img_in_file()
         if filename is None:
             return {'reply': "没有库存了"}
