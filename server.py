@@ -74,6 +74,7 @@ async def send_img(bot, event, filename, delete=True):
         except Exception as e:
             times += 1
             err = e
+            print(e)
     else:
         print(img, err)
         await bot.send(event, "发生错误")
