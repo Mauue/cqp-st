@@ -24,11 +24,10 @@ async def _(event: Event):
         m = s.search(tag)
         return {'reply': m}
     elif message == '#涩图':
-        url = main.get_random_img_in_file()
-        if url is None:
+        filename = main.get_random_img_in_file()
+        if filename is None:
             return {'reply': "没有库存了"}
-        img = MessageSegment.image('temp/'+url)
-        await bot.send(event, img)
+        await send_img(bot, event, filename, delete=False)
     elif message.startswith("#下载"):
         num = message.replace('#下载', '', 1)
         if not num:
@@ -47,21 +46,26 @@ async def _g(event: Event):
         filename = main.get_random_img_in_file()
         if filename is None:
             return {'reply': "没有库存了"}
-        img = MessageSegment.image('temp/' + filename)
-        times = 0
-        err = ""
-        while times < 5:
-            try:
-                await bot.send(event, img)
-                break
-            except Exception as e:
-                times += 1
-                err = e
-        else:
-            print(img, err)
-            return {'reply': "发生错误"}
-        main.delete_image(filename)
-        db.mark_image(filename.split('.')[0])
+        await send_img(bot, event, filename)
+
+
+async def send_img(bot, event, filename, delete=True):
+    img = MessageSegment.image('temp/' + filename)
+    times = 0
+    err = ""
+    while times < 5:
+        try:
+            await bot.send(event, img)
+            if delete:
+                main.delete_image(filename)
+                db.mark_image(filename.split('.')[0])
+            break
+        except Exception as e:
+            times += 1
+            err = e
+    else:
+        print(img, err)
+        await bot.send(event, "发生错误")
 
 
 bot.run(host='127.0.0.1', port=7890)
