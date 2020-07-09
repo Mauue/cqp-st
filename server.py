@@ -23,7 +23,7 @@ async def _(event: Event):
             return {'reply': "需要搜索tag"}
         m = s.search(tag)
         return {'reply': m}
-    elif message == '#涩图':
+    elif message in ['#涩图', '#色图', '#瑟图']:
         filename = main.get_random_img_in_file()
         if filename is None:
             return {'reply': "没有库存了"}
