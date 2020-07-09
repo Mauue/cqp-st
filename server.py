@@ -58,7 +58,8 @@ async def _g(event: Event):
                 times += 1
                 err = e
         else:
-            return {'reply': "发生错误：" + err}
+            print(img, err)
+            return {'reply': "发生错误"}
         main.delete_image(filename)
         db.mark_image(filename.split('.')[0])
 
